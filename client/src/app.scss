@@ -1,0 +1,386 @@
+$color-purple: #8e90f7;
+
+body,html {
+    margin: 0;
+    padding: 0; 
+    background-color: $color-purple;
+    background: radial-gradient(circle, rgba(195,196,252,1) 0%, rgba(91,94,228,1) 100%);
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: superMarioFont;
+    src: url('./assets/fonts/BarcadeBrawlRegular-plYD.ttf');
+}
+
+nav, footer {
+    height: 18vh;
+    width: 100%
+}
+
+.navbar {
+    padding-top: 20px;
+    ul {
+        list-style-type: none;
+        font-family: superMarioFont;
+        color: white;
+        font-size: 1rem;
+        letter-spacing: 4px;
+        line-height: 36px;
+        padding-left: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        li {
+            text-align: center;
+        }
+    }
+
+    .scores-link {
+        cursor: pointer;
+    }
+
+    .score-label {
+        text-align: center;
+
+        .score {
+            padding-top: 5px;
+            font-size: 1rem;
+        }
+    }
+}
+
+input.name-input {
+    background-color: transparent;
+    border: none;
+    font-family: superMarioFont;
+    color: white;
+    font-size: 1rem;
+    max-width: 140px;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+        color: #FFA442;
+    }
+}
+
+.loading {
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+}
+.game-area {
+    height: 60vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:focus { outline: none; }
+}
+
+.mario-container {
+    position: relative;
+    height: 200px;
+    width: 200px;
+
+    .mario-sprites {
+        height: 75px;
+    }
+
+    .coin-block {
+        height: 60px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .mario-jump, .mario-stand {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .jump {
+        animation-name: falling, jumpUp;
+        animation-duration: 150ms, 150ms;
+        animation-delay: 150ms, 0ms;
+        animation-timing-function: ease-out, ease-in;
+        animation-iteration-count: 1, 1;
+    }
+
+    .block-hit {
+        animation-name: bounceDown, bounceUp;
+        animation-duration: 100ms, 100ms;
+        animation-delay: 200ms, 100ms;
+        animation-timing-function: ease-out, ease-in;
+        animation-iteration-count: 1, 1;
+    }
+
+    .mario-jump {
+        display: none;
+    }
+
+    .hide {
+        opacity: 0;
+    }
+
+    .show {
+        display: block;
+    }
+}
+
+footer {
+    position: relative;
+
+    .social {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0 0 10px 0;
+        margin: 0;  
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        
+        li a, li div {
+            font-size: 30px;
+            color: white;
+            margin: 0 20px;
+            cursor: pointer;
+
+            &:hover {
+                opacity: .8;
+            }
+        }
+
+
+    }
+}
+
+.contact-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.363);
+}
+
+.show-modal {
+    display: flex;
+}
+
+.contact-container {
+    height: 300px;
+    width: 400px;
+    background-color: white;
+    border-radius: 3px;
+    animation: bounceInUp 1s;
+    display: flex;
+    color: $color-purple;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    form {
+        display: flex;
+        flex-direction: column;
+       
+        input {
+            margin: 0 0 10px 0;
+            width: 300px;
+            border: 0;
+            height: 30px;
+            border-bottom: 2px solid $color-purple;
+
+            &:focus {
+                border: none;
+                border-bottom: 2px solid $color-purple;
+                opacity: .8;
+            }
+        }
+
+        button {
+            background-color: $color-purple;
+            color: white;
+            border: none;
+            height: 30px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    }
+}
+
+
+@keyframes bounceInUp {
+    0%, 60%, 75%, 90%, 100% {
+        animation-timing-function: cubic-bezier(.215,.61,.355,1);
+    }
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 3000px, 0);
+    }
+    60% {
+        opacity: 1;
+        transform: translate3d(0, -20px, 0);
+    }
+    75% {
+        transform: translate3d(0, 10px, 0);
+    }
+    90% {
+        transform: translate3d(0, -5px, 0);
+    }
+    100% {
+        transform: translateZ(0);
+    }
+}
+
+
+@-webkit-keyframes jumpUp {
+    from {
+        bottom: 0
+    }
+    to {
+        bottom: 80px
+    }
+}
+@-moz-keyframes jumpUp {
+    from {
+        bottom: 0
+    }
+    to {
+        bottom: 80px
+    }
+}
+@-o-keyframes jumpUp {
+    from {
+        bottom: 0
+    }
+    to {
+        bottom: 80px
+    }
+}
+@keyframes jumpUp {
+    from {
+        bottom: 0
+    }
+    to {
+        bottom: 80px
+    }
+}
+
+@-webkit-keyframes falling {
+    from {
+        bottom: 80px;
+    }
+    to {
+        bottom: 0;
+    }
+}
+@-moz-keyframes falling {
+    from {
+        bottom: 80px;
+    }
+    to {
+        bottom: 0;
+    }
+}
+@-o-keyframes falling {
+    from {
+        bottom: 80px;
+    }
+    to {
+        bottom: 0;
+    }
+}
+@keyframes falling {
+    from {
+        bottom: 80px;
+    }
+    to {
+        bottom: 0;
+    }
+}
+
+@-webkit-keyframes bounceUp {
+    from {
+        top: 0px;
+    }
+    to {
+        top: -20px;
+    }
+}
+@-moz-keyframes bounceUp {
+    from {
+        top: 0px;
+    }
+    to {
+        top: -20px;
+    }
+}
+@-o-keyframes bounceUp {
+    from {
+        top: 0px;
+    }
+    to {
+        top: -20px;
+    }
+}
+@keyframes bounceUp {
+    from {
+        top: 0px;
+    }
+    to {
+        top: -20px;
+    }
+}
+
+@-webkit-keyframes bounceDown {
+    from {
+        top: -20px;
+    }
+    to {
+        top: 0;
+    }
+}
+@-moz-keyframes bounceDown {
+    from {
+        top: -20px;
+    }
+    to {
+        top: 0;
+    }
+}
+@-o-keyframes bounceDown {
+    from {
+        top: -20px;
+    }
+    to {
+        top: 0;
+    }
+}
+@keyframes bounceDown {
+    from {
+        top: -20px;
+    }
+    to {
+        top: 0;
+    }
+}
